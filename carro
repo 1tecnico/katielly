@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carro Esportivo - Modelo Thunder 2025</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ececec;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 900px;
+            margin: auto;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .specs, .price {
+            margin-top: 20px;
+        }
+
+        .specs ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .specs li {
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 1.5em;
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background-color: #222;
+            color: white;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Thunder GT 2025</h1>
+    <p>O futuro dos carros esportivos</p>
+</header>
+
+<div class="container">
+    <img src="https://via.placeholder.com/800x400?text=Thunder+GT+2025" alt="Imagem do carro Thunder GT 2025">
+
+    <div class="specs">
+        <h2>Especificações</h2>
+        <ul>
+            <li>Motor: V8 Twin Turbo 4.0L</li>
+            <li>Potência: 620 cv</li>
+            <li>0-100 km/h: 3.2 segundos</li>
+            <li>Velocidade Máxima: 320 km/h</li>
+            <li>Câmbio: Automático de 8 marchas</li>
+            <li>Consumo médio: 9 km/l</li>
+            <li>Cor disponível: Preto Metálico, Vermelho Fogo, Azul Elétrico</li>
+        </ul>
+    </div>
+
+    <div class="price">
+        Preço: R$ 450.000,00
+    </div>
+
+    <a href="mailto:contato@revistacarros.com" class="button">Solicitar Mais Informações</a>
+</div>
+
+<footer>
+    <p>&copy; 2025 Thunder Motors - Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
