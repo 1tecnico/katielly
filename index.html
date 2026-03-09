@@ -1,212 +1,262 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mochila Virtual - 2º Ano</title>
+<title>Mochila Escolar Personalizável</title>
 
 <style>
 body{
-    font-family: Arial, sans-serif;
-    background:#f4f6fb;
-    margin:0;
+font-family:Arial;
+margin:0;
+background:linear-gradient(135deg,#7b2cbf,#c77dff);
+text-align:center;
 }
 
-header{
-    background:#4a6cf7;
-    color:white;
-    text-align:center;
-    padding:20px;
+h1,h2,h3{color:#4b0082;}
+
+#login{margin-top:150px;}
+
+input,textarea{
+padding:8px;
+border-radius:8px;
+border:1px solid #ccc;
+margin:4px;
+}
+
+button{
+padding:8px 15px;
+border:none;
+border-radius:10px;
+background:#7b2cbf;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#5a189a;
+}
+
+#app{
+display:none;
+padding:20px;
 }
 
 .container{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-    gap:20px;
-    padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+margin-top:20px;
 }
 
-.card{
-    background:white;
-    border-radius:10px;
-    padding:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    transition:0.2s;
+.materia{
+background:white;
+border-radius:15px;
+padding:10px;
+box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
-.card:hover{
-    transform:scale(1.03);
+textarea{
+width:100%;
+height:80px;
 }
 
-.card h2{
-    margin-top:0;
-    color:#333;
+.tarefa{
+font-size:14px;
 }
 
-.card a{
-    display:block;
-    text-decoration:none;
-    color:#4a6cf7;
-    margin:5px 0;
-}
-
-footer{
-    text-align:center;
-    padding:15px;
-    color:#777;
-}
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>🎒 Mochila Virtual</h1>
-<p>2º Ano do Ensino Médio</p>
-</header>
-
-<div class="container">
-
-<div class="card">
-<h2>📘 Português</h2>
-<a href="#" onclick="abrirMateria('portugues_gramatica')">Gramática</a>
-<a href="#" onclick="abrirMateria('portugues_literatura')">Literatura</a>
-<a href="#" onclick="abrirMateria('portugues_redacao')">Redação</a>
+<div id="login">
+<h2>🔐 Mochila Escolar</h2>
+<input type="password" id="senha" placeholder="Digite a senha"><br>
+<button onclick="entrar()">Entrar</button>
+<p id="erro" style="color:red"></p>
 </div>
 
-<div class="card">
-<h2>➗ Matemática</h2>
-<a href="#" onclick="abrirMateria('mat_exercicios')">Exercícios</a>
-<a href="#" onclick="abrirMateria('mat_resumos')">Resumos</a>
-<a href="#" onclick="abrirMateria('mat_listas')">Listas</a>
-</div>
+<div id="app">
 
-<div class="card">
-<h2>🔬 Física</h2>
-<a href="#" onclick="abrirMateria('fisica_formulas')">Fórmulas</a>
-<a href="#" onclick="abrirMateria('fisica_cinematica')">Cinemática</a>
-<a href="#" onclick="abrirMateria('fisica_dinamica')">Dinâmica</a>
-</div>
+<h1>🎒 Minha Mochila</h1>
 
-<div class="card">
-<h2>🧪 Química</h2>
-<a href="#" onclick="abrirMateria('quimica_tabela')">Tabela Periódica</a>
-<a href="#" onclick="abrirMateria('quimica_organica')">Química Orgânica</a>
-<a href="#" onclick="abrirMateria('quimica_resumos')">Resumos</a>
-</div>
+<h3>📅 Calendário de Provas</h3>
+<input id="provaMateria" placeholder="Matéria">
+<input type="date" id="provaData">
+<button onclick="addProva()">Adicionar</button>
+<ul id="listaProvas"></ul>
 
-<div class="card">
-<h2>🧬 Biologia</h2>
-<a href="#" onclick="abrirMateria('bio_celulas')">Células</a>
-<a href="#" onclick="abrirMateria('bio_genetica')">Genética</a>
-<a href="#" onclick="abrirMateria('bio_ecologia')">Ecologia</a>
-</div>
+<h3>📊 Notas</h3>
+<input id="notaMateria" placeholder="Matéria">
+<input id="notaValor" type="number" placeholder="Nota">
+<button onclick="addNota()">Adicionar</button>
+<ul id="listaNotas"></ul>
 
-<div class="card">
-<h2>🏛 História</h2>
-<a href="#" onclick="abrirMateria('hist_brasil')">História do Brasil</a>
-<a href="#" onclick="abrirMateria('hist_geral')">História Geral</a>
-</div>
+<h2>📚 Matérias</h2>
+<div class="container" id="materias"></div>
 
-<div class="card">
-<h2>🌎 Geografia</h2>
-<a href="#" onclick="abrirMateria('geo_geopolitica')">Geopolítica</a>
-<a href="#" onclick="abrirMateria('geo_mapas')">Mapas</a>
-</div>
-
-<div class="card">
-<h2>🎨 Artes</h2>
-<a href="#" onclick="abrirMateria('artes_trabalhos')">Trabalhos</a>
-<a href="#" onclick="abrirMateria('artes_historia')">História da Arte</a>
-</div>
-
-<div class="card">
-<h2>🏃 Educação Física</h2>
-<a href="#" onclick="abrirMateria('edfisica_esportes')">Esportes</a>
-<a href="#" onclick="abrirMateria('edfisica_saude')">Saúde</a>
-</div>
-
-<div class="card">
-<h2>🧠 Filosofia</h2>
-<a href="#" onclick="abrirMateria('filosofia_filosofos')">Filósofos</a>
-<a href="#" onclick="abrirMateria('filosofia_resumos')">Resumos</a>
-</div>
-
-<div class="card">
-<h2>👥 Sociologia</h2>
-<a href="#" onclick="abrirMateria('sociologia_sociedade')">Sociedade</a>
-<a href="#" onclick="abrirMateria('sociologia_teorias')">Teorias</a>
-</div>
-
-<div class="card">
-<h2>📊 Projeto de Vida</h2>
-<a href="#" onclick="abrirMateria('projeto_metas')">Metas</a>
-<a href="#" onclick="abrirMateria('projeto_planejamento')">Planejamento</a>
-</div>
-
-<div class="card">
-<h2>🧠 Lógica de Programação</h2>
-<a href="#" onclick="abrirMateria('logica_algoritmos')">Algoritmos</a>
-<a href="#" onclick="abrirMateria('logica_fluxogramas')">Fluxogramas</a>
-<a href="#" onclick="abrirMateria('logica_exercicios')">Exercícios</a>
-</div>
-
-<div class="card">
-<h2>🌐 Programação Web</h2>
-<a href="#" onclick="abrirMateria('web_html')">HTML</a>
-<a href="#" onclick="abrirMateria('web_css')">CSS</a>
-<a href="#" onclick="abrirMateria('web_js')">JavaScript</a>
-</div>
-
-<div class="card">
-<h2>☕ POO Java</h2>
-<a href="#" onclick="abrirMateria('java_classes')">Classes</a>
-<a href="#" onclick="abrirMateria('java_objetos')">Objetos</a>
-<a href="#" onclick="abrirMateria('java_projetos')">Projetos</a>
-</div>
-
-<div class="card">
-<h2>⚙️ Soluções Operacionais</h2>
-<a href="#" onclick="abrirMateria('so_sistemas')">Sistemas</a>
-<a href="#" onclick="abrirMateria('so_manutencao')">Manutenção</a>
-<a href="#" onclick="abrirMateria('so_processos')">Processos</a>
-</div>
-
-</div>
-
-<footer>
-<p>Projeto Mochila Virtual • 2º Ano</p>
-</footer>
-
-<!-- EDITOR DE ANOTAÇÕES -->
-<div id="editor" style="display:none; padding:20px;">
-<h2 id="titulo"></h2>
-<textarea id="texto" style="width:100%; height:300px;"></textarea><br><br>
-<button onclick="salvar()">Salvar</button>
-<button onclick="fechar()">Fechar</button>
 </div>
 
 <script>
 
-let atual="";
+const senhaCorreta="jungkook";
 
-function abrirMateria(m){
-atual=m;
-document.getElementById("editor").style.display="block";
-document.getElementById("titulo").innerText=m;
+function entrar(){
+let senha=document.getElementById("senha").value;
 
-let conteudo=localStorage.getItem(m);
-document.getElementById("texto").value=conteudo?conteudo:"";
+if(senha===senhaCorreta){
+
+document.getElementById("login").style.display="none";
+document.getElementById("app").style.display="block";
+carregarMaterias();
+
+}else{
+document.getElementById("erro").innerText="Senha incorreta";
+}
 }
 
-function salvar(){
-let texto=document.getElementById("texto").value;
-localStorage.setItem(atual,texto);
-alert("Anotação salva!");
+function carregarMaterias(){
+let container=document.getElementById("materias");
+container.innerHTML="";
+
+for(let i=1;i<=21;i++){
+
+let nome=localStorage.getItem("nome"+i)||"";
+let texto=localStorage.getItem("texto"+i)||"";
+
+container.innerHTML+=`
+<div class="materia">
+
+<input value="${nome}" placeholder="Nome da matéria" onchange="salvarNome(${i},this.value)">
+
+<textarea onkeyup="salvarTexto(${i},this.value)" placeholder="Anotações">${texto}</textarea>
+
+<input id="tarefa${i}" placeholder="Nova tarefa">
+
+<button onclick="addTarefa(${i})">Adicionar Tarefa</button>
+
+<ul id="lista${i}"></ul>
+
+</div>
+`;
 }
 
-function fechar(){
-document.getElementById("editor").style.display="none";
+carregarTarefas();
+carregarProvas();
+carregarNotas();
+}
+
+function salvarNome(i,valor){
+localStorage.setItem("nome"+i,valor);
+}
+
+function salvarTexto(i,valor){
+localStorage.setItem("texto"+i,valor);
+}
+
+function addTarefa(i){
+
+let input=document.getElementById("tarefa"+i);
+
+if(input.value==="")return;
+
+let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+
+tarefas.push(input.value);
+
+localStorage.setItem("tarefas"+i,JSON.stringify(tarefas));
+
+input.value="";
+
+carregarTarefas();
+}
+
+function carregarTarefas(){
+
+for(let i=1;i<=21;i++){
+
+let lista=document.getElementById("lista"+i);
+
+if(!lista)continue;
+
+lista.innerHTML="";
+
+let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+
+tarefas.forEach(t=>{
+lista.innerHTML+=`<li class="tarefa">${t}</li>`;
+});
+
+}
+
+}
+
+function addProva(){
+
+let m=document.getElementById("provaMateria").value;
+
+let d=document.getElementById("provaData").value;
+
+if(!m||!d)return;
+
+let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+
+provas.push(m+" - "+d);
+
+localStorage.setItem("provas",JSON.stringify(provas));
+
+carregarProvas();
+
+document.getElementById("provaMateria").value="";
+document.getElementById("provaData").value="";
+}
+
+function carregarProvas(){
+
+let lista=document.getElementById("listaProvas");
+
+lista.innerHTML="";
+
+let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+
+provas.forEach(p=>{
+lista.innerHTML+=`<li>${p}</li>`;
+});
+
+}
+
+function addNota(){
+
+let m=document.getElementById("notaMateria").value;
+
+let v=document.getElementById("notaValor").value;
+
+if(!m||!v)return;
+
+let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+
+notas.push(m+" - "+v);
+
+localStorage.setItem("notas",JSON.stringify(notas));
+
+carregarNotas();
+
+document.getElementById("notaMateria").value="";
+document.getElementById("notaValor").value="";
+}
+
+function carregarNotas(){
+
+let lista=document.getElementById("listaNotas");
+
+lista.innerHTML="";
+
+let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+
+notas.forEach(n=>{
+lista.innerHTML+=`<li>${n}</li>`;
+});
+
 }
 
 </script>
