@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -118,7 +119,7 @@ function carregarMaterias(){
 let container=document.getElementById("materias");
 container.innerHTML="";
 
-for(let i=1;i<=22;i++){  // AGORA TEM 22 MATÉRIAS
+for(let i=1;i<=23;i++){ // agora tem 23 matérias
 
 let nome=localStorage.getItem("nome"+i)||"";
 let texto=localStorage.getItem("texto"+i)||"";
@@ -172,7 +173,7 @@ carregarTarefas();
 
 function carregarTarefas(){
 
-for(let i=1;i<=22;i++){ // ATUALIZADO PARA 22
+for(let i=1;i<=23;i++){ // atualizado para 23
 
 let lista=document.getElementById("lista"+i);
 
@@ -212,6 +213,7 @@ document.getElementById("provaData").value="";
 function carregarProvas(){
 
 let lista=document.getElementById("listaProvas");
+
 lista.innerHTML="";
 
 let provas=JSON.parse(localStorage.getItem("provas")||"[]");
@@ -244,6 +246,7 @@ document.getElementById("notaValor").value="";
 function carregarNotas(){
 
 let lista=document.getElementById("listaNotas");
+
 lista.innerHTML="";
 
 let notas=JSON.parse(localStorage.getItem("notas")||"[]");
@@ -258,3 +261,4 @@ lista.innerHTML+=`<li>${n}</li>`;
 
 </body>
 </html>
+```
