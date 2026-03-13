@@ -9,13 +9,24 @@
 body{
 font-family:Arial;
 margin:0;
-background:linear-gradient(135deg,#7b2cbf,#c77dff);
 text-align:center;
 }
 
-h1,h2,h3{color:#4b0082;}
+/* Fundo com foto do BTS na tela de login */
+#login{
+margin-top:150px;
+background:url("https://wallpapercave.com/wp/wp7421731.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
 
-#login{margin-top:150px;}
+h1,h2,h3{color:#4b0082;}
 
 input,textarea{
 padding:8px;
@@ -40,6 +51,8 @@ background:#5a189a;
 #app{
 display:none;
 padding:20px;
+background:linear-gradient(135deg,#7b2cbf,#c77dff);
+min-height:100vh;
 }
 
 .container{
@@ -70,7 +83,7 @@ font-size:14px;
 <body>
 
 <div id="login">
-<h2>🔐 Mochila Escolar</h2>
+<h2 style="color:white;">🔐 Mochila Escolar</h2>
 <input type="password" id="senha" placeholder="Digite a senha"><br>
 <button onclick="entrar()">Entrar</button>
 <p id="erro" style="color:red"></p>
@@ -119,7 +132,7 @@ function carregarMaterias(){
 let container=document.getElementById("materias");
 container.innerHTML="";
 
-for(let i=1;i<=23;i++){ // agora tem 23 matérias
+for(let i=1;i<=23;i++){
 
 let nome=localStorage.getItem("nome"+i)||"";
 let texto=localStorage.getItem("texto"+i)||"";
@@ -173,7 +186,7 @@ carregarTarefas();
 
 function carregarTarefas(){
 
-for(let i=1;i<=23;i++){ // atualizado para 23
+for(let i=1;i<=23;i++){
 
 let lista=document.getElementById("lista"+i);
 
