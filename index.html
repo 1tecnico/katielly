@@ -11,10 +11,12 @@ margin:0;
 text-align:center;
 }
 
-/* Fundo com BTS (FUNCIONANDO) */
+/* Fundo com sua imagem + overlay escuro */
 #login{
-margin-top:150px;
-background:url("https://images6.alphacoders.com/134/1344303.jpeg");
+margin-top:0;
+background:
+linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+url("bts.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -242,6 +244,8 @@ lista.innerHTML+=`<li>${p}</li>`;
 
 }
 
+}
+
 function addNota(){
 
 let m=document.getElementById("notaMateria").value;
@@ -272,6 +276,8 @@ let notas=JSON.parse(localStorage.getItem("notas")||"[]");
 notas.forEach(n=>{
 lista.innerHTML+=`<li>${n}</li>`;
 });
+
+}
 
 }
 
