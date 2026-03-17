@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,10 +11,10 @@ margin:0;
 text-align:center;
 }
 
-/* Fundo com foto do BTS na tela de login */
+/* Fundo com BTS na tela de login */
 #login{
 margin-top:150px;
-background:url("https://wallpapercave.com/wp/wp7421731.jpg");
+background:url("https://i.imgur.com/3ZQ3Z6R.jpg");
 background-size:cover;
 background-position:center;
 background-repeat:no-repeat;
@@ -24,6 +23,12 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+}
+
+/* Melhorando visibilidade do texto */
+#login h2{
+color:white;
+text-shadow:2px 2px 5px black;
 }
 
 h1,h2,h3{color:#4b0082;}
@@ -83,7 +88,7 @@ font-size:14px;
 <body>
 
 <div id="login">
-<h2 style="color:white;">🔐 Mochila Escolar</h2>
+<h2>🔐 Mochila Escolar</h2>
 <input type="password" id="senha" placeholder="Digite a senha"><br>
 <button onclick="entrar()">Entrar</button>
 <p id="erro" style="color:red"></p>
@@ -274,4 +279,3 @@ lista.innerHTML+=`<li>${n}</li>`;
 
 </body>
 </html>
-```
