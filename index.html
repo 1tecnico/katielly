@@ -6,83 +6,83 @@
 
 <style>
 body{
-font-family:Arial;
-margin:0;
-text-align:center;
+  font-family: Arial;
+  margin:0;
+  text-align: center;
 }
 
-/* Fundo com sua imagem + overlay escuro */
+/* Fundo com imagem do GitHub + overlay escuro */
 #login{
-margin-top:0;
-background:
-linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-url("bts.jpg");
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+  margin-top:0;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url("./imagens/bts.jpg"); /* Caminho relativo à pasta do HTML */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Texto visível */
 #login h2{
-color:white;
-text-shadow:2px 2px 6px black;
+  color:white;
+  text-shadow:2px 2px 6px black;
 }
 
 h1,h2,h3{color:#4b0082;}
 
 input,textarea{
-padding:8px;
-border-radius:8px;
-border:1px solid #ccc;
-margin:4px;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  margin:4px;
 }
 
 button{
-padding:8px 15px;
-border:none;
-border-radius:10px;
-background:#7b2cbf;
-color:white;
-cursor:pointer;
+  padding:8px 15px;
+  border:none;
+  border-radius:10px;
+  background:#7b2cbf;
+  color:white;
+  cursor:pointer;
 }
 
 button:hover{
-background:#5a189a;
+  background:#5a189a;
 }
 
 #app{
-display:none;
-padding:20px;
-background:linear-gradient(135deg,#7b2cbf,#c77dff);
-min-height:100vh;
+  display:none;
+  padding:20px;
+  background:linear-gradient(135deg,#7b2cbf,#c77dff);
+  min-height:100vh;
 }
 
 .container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+  margin-top:20px;
 }
 
 .materia{
-background:white;
-border-radius:15px;
-padding:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.2);
+  background:white;
+  border-radius:15px;
+  padding:10px;
+  box-shadow:0 3px 10px rgba(0,0,0,0.2);
 }
 
 textarea{
-width:100%;
-height:80px;
+  width:100%;
+  height:80px;
 }
 
 .tarefa{
-font-size:14px;
+  font-size:14px;
 }
 </style>
 </head>
@@ -90,197 +90,147 @@ font-size:14px;
 <body>
 
 <div id="login">
-<h2>🔐 Mochila Escolar</h2>
-<input type="password" id="senha" placeholder="Digite a senha"><br>
-<button onclick="entrar()">Entrar</button>
-<p id="erro" style="color:red"></p>
+  <h2>🔐 Mochila Escolar</h2>
+  <input type="password" id="senha" placeholder="Digite a senha"><br>
+  <button onclick="entrar()">Entrar</button>
+  <p id="erro" style="color:red"></p>
 </div>
 
 <div id="app">
 
-<h1>🎒 Minha Mochila</h1>
+  <h1>🎒 Minha Mochila</h1>
 
-<h3>📅 Calendário de Provas</h3>
-<input id="provaMateria" placeholder="Matéria">
-<input type="date" id="provaData">
-<button onclick="addProva()">Adicionar</button>
-<ul id="listaProvas"></ul>
+  <h3>📅 Calendário de Provas</h3>
+  <input id="provaMateria" placeholder="Matéria">
+  <input type="date" id="provaData">
+  <button onclick="addProva()">Adicionar</button>
+  <ul id="listaProvas"></ul>
 
-<h3>📊 Notas</h3>
-<input id="notaMateria" placeholder="Matéria">
-<input id="notaValor" type="number" placeholder="Nota">
-<button onclick="addNota()">Adicionar</button>
-<ul id="listaNotas"></ul>
+  <h3>📊 Notas</h3>
+  <input id="notaMateria" placeholder="Matéria">
+  <input id="notaValor" type="number" placeholder="Nota">
+  <button onclick="addNota()">Adicionar</button>
+  <ul id="listaNotas"></ul>
 
-<h2>📚 Matérias</h2>
-<div class="container" id="materias"></div>
+  <h2>📚 Matérias</h2>
+  <div class="container" id="materias"></div>
 
 </div>
 
 <script>
-
 const senhaCorreta="jungkook";
 
 function entrar(){
-let senha=document.getElementById("senha").value;
-
-if(senha===senhaCorreta){
-
-document.getElementById("login").style.display="none";
-document.getElementById("app").style.display="block";
-carregarMaterias();
-
-}else{
-document.getElementById("erro").innerText="Senha incorreta";
-}
+  let senha=document.getElementById("senha").value;
+  if(senha===senhaCorreta){
+    document.getElementById("login").style.display="none";
+    document.getElementById("app").style.display="block";
+    carregarMaterias();
+  }else{
+    document.getElementById("erro").innerText="Senha incorreta";
+  }
 }
 
 function carregarMaterias(){
-let container=document.getElementById("materias");
-container.innerHTML="";
+  let container=document.getElementById("materias");
+  container.innerHTML="";
 
-for(let i=1;i<=23;i++){
+  for(let i=1;i<=23;i++){
+    let nome=localStorage.getItem("nome"+i)||"";
+    let texto=localStorage.getItem("texto"+i)||"";
 
-let nome=localStorage.getItem("nome"+i)||"";
-let texto=localStorage.getItem("texto"+i)||"";
+    container.innerHTML+=`
+      <div class="materia">
+        <input value="${nome}" placeholder="Nome da matéria" onchange="salvarNome(${i},this.value)">
+        <textarea onkeyup="salvarTexto(${i},this.value)" placeholder="Anotações">${texto}</textarea>
+        <input id="tarefa${i}" placeholder="Nova tarefa">
+        <button onclick="addTarefa(${i})">Adicionar Tarefa</button>
+        <ul id="lista${i}"></ul>
+      </div>
+    `;
+  }
 
-container.innerHTML+=`
-<div class="materia">
-
-<input value="${nome}" placeholder="Nome da matéria" onchange="salvarNome(${i},this.value)">
-
-<textarea onkeyup="salvarTexto(${i},this.value)" placeholder="Anotações">${texto}</textarea>
-
-<input id="tarefa${i}" placeholder="Nova tarefa">
-
-<button onclick="addTarefa(${i})">Adicionar Tarefa</button>
-
-<ul id="lista${i}"></ul>
-
-</div>
-`;
-}
-
-carregarTarefas();
-carregarProvas();
-carregarNotas();
+  carregarTarefas();
+  carregarProvas();
+  carregarNotas();
 }
 
 function salvarNome(i,valor){
-localStorage.setItem("nome"+i,valor);
+  localStorage.setItem("nome"+i,valor);
 }
 
 function salvarTexto(i,valor){
-localStorage.setItem("texto"+i,valor);
+  localStorage.setItem("texto"+i,valor);
 }
 
 function addTarefa(i){
+  let input=document.getElementById("tarefa"+i);
+  if(input.value==="")return;
 
-let input=document.getElementById("tarefa"+i);
-
-if(input.value==="")return;
-
-let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
-
-tarefas.push(input.value);
-
-localStorage.setItem("tarefas"+i,JSON.stringify(tarefas));
-
-input.value="";
-
-carregarTarefas();
+  let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+  tarefas.push(input.value);
+  localStorage.setItem("tarefas"+i,JSON.stringify(tarefas));
+  input.value="";
+  carregarTarefas();
 }
 
 function carregarTarefas(){
-
-for(let i=1;i<=23;i++){
-
-let lista=document.getElementById("lista"+i);
-
-if(!lista)continue;
-
-lista.innerHTML="";
-
-let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
-
-tarefas.forEach(t=>{
-lista.innerHTML+=`<li class="tarefa">${t}</li>`;
-});
-
-}
-
+  for(let i=1;i<=23;i++){
+    let lista=document.getElementById("lista"+i);
+    if(!lista) continue;
+    lista.innerHTML="";
+    let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+    tarefas.forEach(t=>{
+      lista.innerHTML+=`<li class="tarefa">${t}</li>`;
+    });
+  }
 }
 
 function addProva(){
+  let m=document.getElementById("provaMateria").value;
+  let d=document.getElementById("provaData").value;
+  if(!m||!d)return;
 
-let m=document.getElementById("provaMateria").value;
-let d=document.getElementById("provaData").value;
+  let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+  provas.push(m+" - "+d);
+  localStorage.setItem("provas",JSON.stringify(provas));
 
-if(!m||!d)return;
-
-let provas=JSON.parse(localStorage.getItem("provas")||"[]");
-
-provas.push(m+" - "+d);
-
-localStorage.setItem("provas",JSON.stringify(provas));
-
-carregarProvas();
-
-document.getElementById("provaMateria").value="";
-document.getElementById("provaData").value="";
+  document.getElementById("provaMateria").value="";
+  document.getElementById("provaData").value="";
+  carregarProvas();
 }
 
 function carregarProvas(){
-
-let lista=document.getElementById("listaProvas");
-
-lista.innerHTML="";
-
-let provas=JSON.parse(localStorage.getItem("provas")||"[]");
-
-provas.forEach(p=>{
-lista.innerHTML+=`<li>${p}</li>`;
-});
-
-}
-
+  let lista=document.getElementById("listaProvas");
+  lista.innerHTML="";
+  let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+  provas.forEach(p=>{
+    lista.innerHTML+=`<li>${p}</li>`;
+  });
 }
 
 function addNota(){
+  let m=document.getElementById("notaMateria").value;
+  let v=document.getElementById("notaValor").value;
+  if(!m||!v) return;
 
-let m=document.getElementById("notaMateria").value;
-let v=document.getElementById("notaValor").value;
+  let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+  notas.push(m+" - "+v);
+  localStorage.setItem("notas",JSON.stringify(notas));
 
-if(!m||!v)return;
-
-let notas=JSON.parse(localStorage.getItem("notas")||"[]");
-
-notas.push(m+" - "+v);
-
-localStorage.setItem("notas",JSON.stringify(notas));
-
-carregarNotas();
-
-document.getElementById("notaMateria").value="";
-document.getElementById("notaValor").value="";
+  document.getElementById("notaMateria").value="";
+  document.getElementById("notaValor").value="";
+  carregarNotas();
 }
 
 function carregarNotas(){
-
-let lista=document.getElementById("listaNotas");
-
-lista.innerHTML="";
-
-let notas=JSON.parse(localStorage.getItem("notas")||"[]");
-
-notas.forEach(n=>{
-lista.innerHTML+=`<li>${n}</li>`;
-});
-
+  let lista=document.getElementById("listaNotas");
+  lista.innerHTML="";
+  let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+  notas.forEach(n=>{
+    lista.innerHTML+=`<li>${n}</li>`;
+  });
 }
-
-}
-
 </script>
 
 </body>
