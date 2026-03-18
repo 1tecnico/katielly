@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Mochila Escolar Personalizável</title>
+<title>Mochila Escolar</title>
 
 <style>
 body{
@@ -11,49 +12,19 @@ body{
   text-align: center;
 }
 
-/* Fundo com imagem do GitHub + overlay escuro */
 #login{
-  margin-top:0;
   background:
     linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-    url("./imagens/bts.jpg"); /* Caminho relativo à pasta do HTML */
+    url("./imagens/bts.jpg");
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
 }
 
-/* Texto visível */
-#login h2{
-  color:white;
-  text-shadow:2px 2px 6px black;
-}
-
-h1,h2,h3{color:#4b0082;}
-
-input,textarea{
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ccc;
-  margin:4px;
-}
-
-button{
-  padding:8px 15px;
-  border:none;
-  border-radius:10px;
-  background:#7b2cbf;
-  color:white;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#5a189a;
-}
+#login h2{color:white;}
 
 #app{
   display:none;
@@ -66,54 +37,57 @@ button:hover{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:15px;
-  margin-top:20px;
 }
 
 .materia{
   background:white;
-  border-radius:15px;
   padding:10px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.2);
+  border-radius:10px;
 }
 
-textarea{
-  width:100%;
-  height:80px;
-}
+textarea{width:100%;height:70px;}
 
-.tarefa{
-  font-size:14px;
+button{
+  margin:5px;
+  padding:8px;
+  border:none;
+  border-radius:8px;
+  background:#7b2cbf;
+  color:white;
 }
 </style>
+
 </head>
 
 <body>
 
 <div id="login">
   <h2>🔐 Mochila Escolar</h2>
-  <input type="password" id="senha" placeholder="Digite a senha"><br>
+  <input type="password" id="senha" placeholder="Senha">
   <button onclick="entrar()">Entrar</button>
-  <p id="erro" style="color:red"></p>
+  <p id="erro"></p>
 </div>
 
 <div id="app">
 
-  <h1>🎒 Minha Mochila</h1>
+<h1>🎒 Mochila</h1>
 
-  <h3>📅 Calendário de Provas</h3>
-  <input id="provaMateria" placeholder="Matéria">
-  <input type="date" id="provaData">
-  <button onclick="addProva()">Adicionar</button>
-  <ul id="listaProvas"></ul>
+<button onclick="exportarDados()">💾 Backup</button>
 
-  <h3>📊 Notas</h3>
-  <input id="notaMateria" placeholder="Matéria">
-  <input id="notaValor" type="number" placeholder="Nota">
-  <button onclick="addNota()">Adicionar</button>
-  <ul id="listaNotas"></ul>
+<h3>📅 Provas</h3>
+<input id="provaMateria" placeholder="Matéria">
+<input type="date" id="provaData">
+<button onclick="addProva()">Adicionar</button>
+<ul id="listaProvas"></ul>
 
-  <h2>📚 Matérias</h2>
-  <div class="container" id="materias"></div>
+<h3>📊 Notas</h3>
+<input id="notaMateria" placeholder="Matéria">
+<input id="notaValor" type="number">
+<button onclick="addNota()">Adicionar</button>
+<ul id="listaNotas"></ul>
+
+<h2>📚 Matérias</h2>
+<div class="container" id="materias"></div>
 
 </div>
 
@@ -135,103 +109,99 @@ function carregarMaterias(){
   let container=document.getElementById("materias");
   container.innerHTML="";
 
+  const materiasPadrao=[
+    "Português","Matemática","Física","Química","Biologia",
+    "História","Geografia","Inglês","Educação Física",
+    "Filosofia","Sociologia",
+    "Programação","Banco de Dados","Redes",
+    "Sistemas Operacionais","Desenvolvimento Web",
+    "Algoritmos","Projeto Técnico","Eletrônica",
+    "Automação","Empreendedorismo","Segurança da Informação","UX/UI"
+  ];
+
   for(let i=1;i<=23;i++){
-    let nome=localStorage.getItem("nome"+i)||"";
+    let nome=localStorage.getItem("nome"+i)||materiasPadrao[i-1];
     let texto=localStorage.getItem("texto"+i)||"";
 
     container.innerHTML+=`
-      <div class="materia">
-        <input value="${nome}" placeholder="Nome da matéria" onchange="salvarNome(${i},this.value)">
-        <textarea onkeyup="salvarTexto(${i},this.value)" placeholder="Anotações">${texto}</textarea>
-        <input id="tarefa${i}" placeholder="Nova tarefa">
-        <button onclick="addTarefa(${i})">Adicionar Tarefa</button>
-        <ul id="lista${i}"></ul>
-      </div>
-    `;
-  }
+    <div class="materia">
+      <input value="${nome}" onchange="salvarNome(${i},this.value)">
+      <textarea onkeyup="salvarTexto(${i},this.value)">${texto}</textarea>
 
-  carregarTarefas();
-  carregarProvas();
-  carregarNotas();
+```
+  <input id="tarefa${i}" placeholder="Nova tarefa">
+  <button onclick="addTarefa(${i})">Add</button>
+  <ul id="lista${i}"></ul>
+</div>`;
+```
+
 }
 
-function salvarNome(i,valor){
-  localStorage.setItem("nome"+i,valor);
+carregarTarefas();
+carregarProvas();
+carregarNotas();
 }
 
-function salvarTexto(i,valor){
-  localStorage.setItem("texto"+i,valor);
-}
+function salvarNome(i,v){localStorage.setItem("nome"+i,v);}
+function salvarTexto(i,v){localStorage.setItem("texto"+i,v);}
 
 function addTarefa(i){
-  let input=document.getElementById("tarefa"+i);
-  if(input.value==="")return;
-
-  let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
-  tarefas.push(input.value);
-  localStorage.setItem("tarefas"+i,JSON.stringify(tarefas));
-  input.value="";
-  carregarTarefas();
+let input=document.getElementById("tarefa"+i);
+let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+tarefas.push(input.value);
+localStorage.setItem("tarefas"+i,JSON.stringify(tarefas));
+input.value="";
+carregarTarefas();
 }
 
 function carregarTarefas(){
-  for(let i=1;i<=23;i++){
-    let lista=document.getElementById("lista"+i);
-    if(!lista) continue;
-    lista.innerHTML="";
-    let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
-    tarefas.forEach(t=>{
-      lista.innerHTML+=`<li class="tarefa">${t}</li>`;
-    });
-  }
+for(let i=1;i<=23;i++){
+let lista=document.getElementById("lista"+i);
+if(!lista)continue;
+lista.innerHTML="";
+let tarefas=JSON.parse(localStorage.getItem("tarefas"+i)||"[]");
+tarefas.forEach(t=>lista.innerHTML+=`<li>${t}</li>`);
+}
 }
 
 function addProva(){
-  let m=document.getElementById("provaMateria").value;
-  let d=document.getElementById("provaData").value;
-  if(!m||!d)return;
-
-  let provas=JSON.parse(localStorage.getItem("provas")||"[]");
-  provas.push(m+" - "+d);
-  localStorage.setItem("provas",JSON.stringify(provas));
-
-  document.getElementById("provaMateria").value="";
-  document.getElementById("provaData").value="";
-  carregarProvas();
+let m=provaMateria.value;
+let d=provaData.value;
+let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+provas.push(m+" - "+d);
+localStorage.setItem("provas",JSON.stringify(provas));
+carregarProvas();
 }
 
 function carregarProvas(){
-  let lista=document.getElementById("listaProvas");
-  lista.innerHTML="";
-  let provas=JSON.parse(localStorage.getItem("provas")||"[]");
-  provas.forEach(p=>{
-    lista.innerHTML+=`<li>${p}</li>`;
-  });
+listaProvas.innerHTML="";
+let provas=JSON.parse(localStorage.getItem("provas")||"[]");
+provas.forEach(p=>listaProvas.innerHTML+=`<li>${p}</li>`);
 }
 
 function addNota(){
-  let m=document.getElementById("notaMateria").value;
-  let v=document.getElementById("notaValor").value;
-  if(!m||!v) return;
-
-  let notas=JSON.parse(localStorage.getItem("notas")||"[]");
-  notas.push(m+" - "+v);
-  localStorage.setItem("notas",JSON.stringify(notas));
-
-  document.getElementById("notaMateria").value="";
-  document.getElementById("notaValor").value="";
-  carregarNotas();
+let m=notaMateria.value;
+let v=notaValor.value;
+let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+notas.push(m+" - "+v);
+localStorage.setItem("notas",JSON.stringify(notas));
+carregarNotas();
 }
 
 function carregarNotas(){
-  let lista=document.getElementById("listaNotas");
-  lista.innerHTML="";
-  let notas=JSON.parse(localStorage.getItem("notas")||"[]");
-  notas.forEach(n=>{
-    lista.innerHTML+=`<li>${n}</li>`;
-  });
+listaNotas.innerHTML="";
+let notas=JSON.parse(localStorage.getItem("notas")||"[]");
+notas.forEach(n=>listaNotas.innerHTML+=`<li>${n}</li>`);
 }
-</script>
+
+function exportarDados(){
+let dados=JSON.stringify(localStorage);
+let blob=new Blob([dados],{type:"application/json"});
+let a=document.createElement("a");
+a.href=URL.createObjectURL(blob);
+a.download="backup.json";
+a.click();
+} </script>
 
 </body>
 </html>
